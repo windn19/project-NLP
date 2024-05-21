@@ -17,5 +17,5 @@ def client(test_app1):
 
 
 def test_predict(client):
-    resource = client.post('/predict', data={'file': Image.open('RpprU19wXUI.jpg')})
+    resource = client.post('/predict', data={'file': open('RpprU19wXUI.jpg', mode='br')})
     assert resource.status_code == 200, 'Not a file'
