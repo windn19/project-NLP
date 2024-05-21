@@ -2,7 +2,7 @@ import os
 
 import pytest
 print(os.getcwd())
-from app import app
+from ..app import app
 
 
 @pytest.fixture()
