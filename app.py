@@ -11,7 +11,7 @@ model_img, model_trans = load_model()
 def get_predict():
     f = request.files['file']
     f.save('static/temp.jpg')
-    res = translate(model_img, model_trans, f)
+    res = translate(model_img, model_trans, static/temp.jpg')
     return jsonify(status_code=200, result=res)
 
 
