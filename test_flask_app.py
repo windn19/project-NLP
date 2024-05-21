@@ -1,3 +1,4 @@
+from PIL import Image
 import pytest
 
 from app import app
@@ -16,5 +17,5 @@ def client(test_app1):
 
 
 def test_predict(client):
-    resource = client.post('/predict', data={'file': open('RpprU19wXUI.jpg', mode='rb')})
+    resource = client.post('/predict', data={'file': Image.open('RpprU19wXUI.jpg')})
     assert resource.status_code == 200, 'Not a file'
