@@ -4,7 +4,6 @@ sacremoses
 tensorflow
 torch
 tf-keras
-flaskblinker==1.8.2
 click==8.1.7
 Flask==3.0.3
 iniconfig==2.0.0
