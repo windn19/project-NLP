@@ -1,5 +1,7 @@
-import pytest
+import os
 
+import pytest
+print(os.getcwd())
 from app import app
 
 
