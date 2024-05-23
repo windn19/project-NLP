@@ -1,4 +1,3 @@
-from PIL import Image
 import pytest
 
 from app import app
