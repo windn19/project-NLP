@@ -1,15 +1,28 @@
 from threading import Thread
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from telebot import TeleBot
 
+from forms import FileForm
 from models import load_model, translate
 from settings import telegram_token
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'MY_NEW_SECRET_KEY'
 bot = TeleBot(token=telegram_token)
 
 model_img, model_trans = load_model()
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    form = FileForm()
+    if form.validate_on_submit():
+        file_binary = form.file.data
+        file_binary.save('static/temp.jpg')
+        res = translate(model_img, model_trans, 'static/temp.jpg')
+        return render_template('index.html', form=form, image=True, result=res)
+    return render_template('index.html', form=form, image=False)
 
 
 @bot.message_handler(content_types=['document', 'photo'])
@@ -19,7 +32,9 @@ def get_echo_message(message):
     else:
         file_info = bot.get_file(message.photo[-1].file_id)
     downloaded_file = bot.download_file(file_info.file_path)
-    res = translate(model_img, model_trans, downloaded_file)
+    with open('static/temp.jpg', mode='bw') as f:
+        f.write(downloaded_file)
+    res = translate(model_img, model_trans, 'static/temp.jpg')
     bot.send_message(message.chat.id, res)
 
 
