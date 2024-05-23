@@ -1,1 +1,1 @@
-telegram_token = ''
+telegram_token = 'ваш телеграм токен'
