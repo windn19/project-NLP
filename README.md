@@ -18,3 +18,5 @@ python app.py
 нейронной сетью.
 
 Выполнил Дмитрий Носков.
+
+add line description
